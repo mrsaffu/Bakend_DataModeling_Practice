@@ -10,10 +10,34 @@ This document provides a structured guide for implementing backend data modeling
 - **Mongoose** - ODM (Object Data Modeling) for MongoDB
 - **Postman** - API testing tool
 
+## Installation
+To get started, clone the repository and install the dependencies:
 
+```sh
+git clone <repo-url>
+cd <project-directory>
+npm install
 ```
 
-
+## Setting Up the Database
+1. Install MongoDB and start the database server.
+2. Create a `.env` file and define your database connection string:
+   ```env
+   MONGO_URI=mongodb://localhost:27017/your_database_name
+   ```
+3. Connect MongoDB in your Express application (`server.js` or `app.js`):
+   ```js
+   import mongoose from "mongoose";
+   import dotenv from "dotenv";
+   
+   dotenv.config();
+   
+   mongoose.connect(process.env.MONGO_URI, {
+       useNewUrlParser: true,
+       useUnifiedTopology: true
+   }).then(() => console.log('Database Connected'))
+     .catch(err => console.error('Database Connection Error:', err));
+   ```
 
 ## Defining Data Models
 This application consists of three data models: `User`, `Todo`, and `Subtodo`.
@@ -40,15 +64,14 @@ let userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        requred: [true, "Password required"]
-    },
-},{
-    timestamps:true
-  })
-export const User = mongoose.model("User", userSchema)
+        required: [true, "Password required"]
+    }
+}, {
+    timestamps: true
+});
 
-
-
+export const User = mongoose.model("User", userSchema);
+```
 
 ### Todo Model
 Defines tasks with references to the `User` and `Subtodo` models.
@@ -65,7 +88,6 @@ let todoSchema = new mongoose.Schema({
     complete: {
         type: Boolean,
         default: false
-
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
@@ -77,17 +99,15 @@ let todoSchema = new mongoose.Schema({
             ref: "Subtodo"
         }
     ]
-    }, {
+}, {
     timestamps: true
-    })
-    
-    export let Todo = mongoose.model("Todo", todoSchema)
+});
 
-
+export let Todo = mongoose.model("Todo", todoSchema);
+```
 
 ### Subtodo Model
 Defines subtasks associated with a `Todo` and created by a `User`.
->>>>>>> 4a8cbbb (add redme)
 
 Example: `models/Subtodo.js`
 ```js
@@ -181,7 +201,3 @@ Use Postman or cURL to test API endpoints.
 ## Conclusion
 This guide provides a foundation for backend data modeling using Express.js. You can extend this structure for additional models and API functionalities as per your project requirements.
 
-<<<<<<< HEAD
-const Subtodo = mongoose.model("Subtodo",subTodoSchema)
-=======
->>>>>>> 4a8cbbb (add redme)
