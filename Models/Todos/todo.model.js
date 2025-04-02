@@ -1,29 +1,29 @@
 import mongoose from "mongoose";
 
 let todoSchema = new mongoose.Schema({
-    content:{
-        type:String,
-        required:true
-        
+    content: {
+        type: String,
+        required: true
+
     },
-    complete:{
-        type:Boolean,
-        default:false,
+    complete: {
+        type: Boolean,
+        default: false,
     },
-    createdBy:{
-        type:mongoose.Schema.Types.ObjectId,
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User"
 
     },
-    subTodos:[
+    subTodos: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Subtodo"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Subtodo"
         }
     ]
 
-},{
-    timestamps:true
+}, {
+    timestamps: true
 })
 
-export let Todo = mongoose.model("Todo",todoSchema)
+export let Todo = mongoose.model("Todo", todoSchema)
