@@ -10,13 +10,7 @@ This document provides a structured guide for implementing backend data modeling
 - **Mongoose** - ODM (Object Data Modeling) for MongoDB
 - **Postman** - API testing tool
 
-## Installation
-To get started, clone the repository and install the dependencies:
 
-```sh
-git clone <repo-url>
-cd <project-directory>
-npm install
 ```
 
 ## Setting Up the Database
