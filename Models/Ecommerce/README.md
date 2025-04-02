@@ -18,7 +18,42 @@ yarn add mongoose
 
 ## Models
 
-### 1. Category Model
+### 1. User Model
+The `User` model defines users who can register and manage their accounts.
+
+#### Schema Definition:
+```js
+import mongoose from "mongoose";
+
+const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+}, { timestamps: true });
+
+export const User = mongoose.model("User", userSchema);
+```
+
+#### Fields:
+- `username`: A unique, lowercase string representing the user's name.
+- `email`: A unique, lowercase string for user authentication.
+- `password`: A required field storing the user's password.
+- `timestamps`: Automatically adds `createdAt` and `updatedAt` fields.
+
+### 2. Category Model
 The `Category` model defines different product categories.
 
 #### Schema Definition:
@@ -39,7 +74,7 @@ export let Category = mongoose.model('Category', categorySchema);
 - `name`: A required string representing the category name.
 - `timestamps`: Automatically adds `createdAt` and `updatedAt` fields.
 
-### 2. Product Model
+### 3. Product Model
 The `Product` model stores product details.
 
 #### Schema Definition:
@@ -90,7 +125,7 @@ export let Product = mongoose.model('Product', productSchema);
 - `owner`: A reference to the `User` model.
 - `timestamps`: Automatically adds `createdAt` and `updatedAt` fields.
 
-### 3. Order Model
+### 4. Order Model
 The `Order` model stores details about customer orders.
 
 #### Schema Definition:
@@ -145,6 +180,7 @@ export let Order = mongoose.model('Order', orderSchema);
 To use these models, import them into your project:
 
 ```js
+import { User } from "./models/User";
 import { Category } from "./models/Category";
 import { Product } from "./models/Product";
 import { Order } from "./models/Order";
