@@ -13,25 +13,7 @@ This document provides a structured guide for implementing backend data modeling
 
 ```
 
-## Setting Up the Database
-1. Install MongoDB and start the database server.
-2. Create a `.env` file and define your database connection string:
-   ```env
-   MONGO_URI=mongodb://localhost:27017/your_database_name
-   ```
-3. Connect MongoDB in your Express application (`server.js` or `app.js`):
-   ```js
-   import mongoose from "mongoose";
-   import dotenv from "dotenv";
-   
-   dotenv.config();
-   
-   mongoose.connect(process.env.MONGO_URI, {
-       useNewUrlParser: true,
-       useUnifiedTopology: true
-   }).then(() => console.log('Database Connected'))
-     .catch(err => console.error('Database Connection Error:', err));
-   ```
+
 
 ## Defining Data Models
 This application consists of three data models: `User`, `Todo`, and `Subtodo`.
@@ -58,43 +40,15 @@ let userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-<<<<<<< HEAD
         requred: [true, "Password required"]
     },
 },{
     timestamps:true
   })
-
 export const User = mongoose.model("User", userSchema)
 
 
-# Todo Model
-Defines tasks with references to the User and Subtodo models.
 
-* Example: models/Todo.js
-
-
-
-import mongoose from "mongoose";
-
-let
-    content: {
-        type: String,
-        required: true
-        
-    },
-    complete: {
-        type: Boolean,
-        default: false,
-=======
-        required: [true, "Password required"]
-    }
-}, {
-    timestamps: true
-});
-
-export const User = mongoose.model("User", userSchema);
-```
 
 ### Todo Model
 Defines tasks with references to the `User` and `Subtodo` models.
@@ -111,7 +65,7 @@ let todoSchema = new mongoose.Schema({
     complete: {
         type: Boolean,
         default: false
->>>>>>> 4a8cbbb (add redme)
+
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
@@ -123,19 +77,13 @@ let todoSchema = new mongoose.Schema({
             ref: "Subtodo"
         }
     ]
-<<<<<<< HEAD
     }, {
     timestamps: true
     })
     
     export let Todo = mongoose.model("Todo", todoSchema)
-=======
-}, {
-    timestamps: true
-});
 
-export let Todo = mongoose.model("Todo", todoSchema);
-```
+
 
 ### Subtodo Model
 Defines subtasks associated with a `Todo` and created by a `User`.
