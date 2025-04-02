@@ -59,13 +59,15 @@ Defines tasks with references to the User and Subtodo models.
 
 * Example: models/Todo.js
 
+
+
 import mongoose from "mongoose";
 
-let todoSchema = new mongoose.Schema({
+let
     content: {
         type: String,
         required: true
-
+        
     },
     complete: {
         type: Boolean,
@@ -82,12 +84,11 @@ let todoSchema = new mongoose.Schema({
             ref: "Subtodo"
         }
     ]
-
-}, {
+    }, {
     timestamps: true
-})
-
-export let Todo = mongoose.model("Todo", todoSchema)
+    })
+    
+    export let Todo = mongoose.model("Todo", todoSchema)
 
 
 # Subtodo Model
